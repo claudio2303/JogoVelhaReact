@@ -64,11 +64,11 @@ class App extends Component {
     if (this.state.Ganhei === 1) {
 
       if (this.state.Player === 2) {
-        alert("O Bolinha Ganhou");
+        alert("O X Ganhou");
 
       }
       if (this.state.Player === 1) {
-        alert("O X Ganhou");
+        alert("O Bolinha Ganhou");
 
       }
     }
@@ -201,9 +201,12 @@ class App extends Component {
 
   desenha(ctx, x, y) {
     if (this.state.jogada % 2 === 1 && this.state.jogada > 0) {
-      ctx.fillStyle = 'green';
+      
       ctx.beginPath();
-      ctx.arc(x, y, 60, 0, 2 * 3.14);
+      ctx.moveTo(x - 60, y - 60);
+      ctx.lineTo(x + 60, y + 60);
+      ctx.moveTo(x + 60, y - 60);
+      ctx.lineTo(x - 60, y + 60);
       ctx.stroke();
       this.setState({
         jogada: this.state.jogada - 1,
@@ -211,12 +214,9 @@ class App extends Component {
       });
 
     } else if (this.state.jogada % 2 === 0 && this.state.jogada > 0) {
-      ctx.fillStyle = 'yellow';
+      
       ctx.beginPath();
-      ctx.moveTo(x - 60, y - 60);
-      ctx.lineTo(x + 60, y + 60);
-      ctx.moveTo(x + 60, y - 60);
-      ctx.lineTo(x - 60, y + 60);
+      ctx.arc(x, y, 60, 0, 2 * 3.14);
       ctx.stroke();
       this.setState({
         jogada: this.state.jogada - 1,
